@@ -1,0 +1,71 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Home";
+    Layout = "_Layout";
+}
+
+<!-- Start Main Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center mb-5 mb-md-0">
+                <img class="img-fluid" src="images/watch.png" alt="" />
+            </div>
+            <div class="col-md-6 align-self-center text-center text-md-left">
+                <div class="block">
+                    <h1 class="font-weight-bold mb-4 font-size-60">
+                        Believe in Technology, Make the change
+                    </h1>
+                    <p class="mb-4">
+                        Stay ahead of the curve with our collection of smartwatches. Our
+                        watches are designed to keep you connected and on top of your
+                        game. With features like fitness tracking, heart rate
+                        monitoring, and GPS, you’ll be able to stay on top of your
+                        health and fitness goals. Plus, with our sleek and stylish
+                        designs, you’ll look great while doing it. Whether you’re
+                        looking for a watch to help you stay on track during your
+                        workouts or one that can keep up with your busy lifestyle, we’ve
+                        got you covered. Visit us today and discover the perfect
+                        smartwatch for you!
+                    </p>
+
+                    <a href="products" class="btn btn-main">SignIn Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Main Section -->
+<!-- Start Products Section -->
+<section class="gallery" id="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h2>Checkout Our All Products</h2>
+                </div>
+                <div class="product-slider">
+                    @foreach (var product in Model)
+                    {
+                        <div class="block">
+                            <div class="gallery-overlay">
+                                <a asp-controller="Products" asp-action="Details"
+                                   asp-route-id="@product.Id" class="gallery-popup">
+                                    <i class="tf-ion-plus-round"></i>
+                                </a>
+                            </div>
+                            <img class="img-fluid w-100"
+                                 src="data:image/*;base64,@(Convert.ToBase64String(product.Poster))"
+                                 alt="@product.Name" />
+                        </div>
+                    }                                             
+                </div>               
+                <div class="heading2">
+                    <a asp-controller="Products" asp-action="IndexProducts" class="products_all">Browse All Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Products -->

@@ -1,0 +1,42 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "_Layout";
+}
+
+<section class="section gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h1 class="font-weight-bold">All latest Smart Watch</h1>
+            </div>
+            @foreach(var Product in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="block">
+                        <div class="gallery-overlay">
+                            <a asp-controller="Products" asp-action="Details"
+                               asp-route-id="@Product.Id" class="gallery-popup">
+                                <i class="tf-ion-plus-round"></i>
+                            </a>
+                        </div>
+                        <img class="img-fluid w-100"
+                             src="data:image/*;base64,@(Convert.ToBase64String(Product.Poster))"
+                             alt="@Product.Name" />
+                    </div>
+                    <div class="product-info">
+                        <h4 class="mb-2">
+                            <a asp-controller="Products" asp-action="Details"
+                               asp-route-id="@Product.Id" class="link-title">@Product.Name</a>
+                        </h4>
+                        <p class="price">
+                            $@Product.Price                            
+                        </p>
+                    </div>
+                </div>
+            }
+                       
+        </div>
+    </div>
+</section>
