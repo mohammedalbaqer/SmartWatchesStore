@@ -18,7 +18,7 @@ namespace SmartWatchesStore.Migrations
 
             modelBuilder.Entity("SmartWatchesStore.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -40,9 +40,9 @@ namespace SmartWatchesStore.Migrations
                         .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<double>("Price")
+                    b.Property<decimal>("Price")
                         .HasMaxLength(2500)
-                        .HasColumnType("REAL");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

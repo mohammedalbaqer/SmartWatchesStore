@@ -18,9 +18,12 @@
                     <h1 class="mb-4">@Model.Name</h1>
                     <p><strong>Color: </strong>@Model.Color</p>
                     <p class="price py-4">$@Model.Price.ToString()</p>
-                    <button type="submit" class="snipcart-add-item btn btn-main mb-5">
+               @*  <button asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" class="snipcart-add-item btn btn-main mb-5">
                         Add to Cart
-                    </button>
+                    </button> *@
+                <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" class="snipcart-add-item btn btn-main mb-5">
+                    Add to Cart
+                    </a>
                     <div class="content">
                         <p>
                             @Model.Description

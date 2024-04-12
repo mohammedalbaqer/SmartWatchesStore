@@ -10,8 +10,8 @@ using SmartWatchesStore.Data;
 namespace SmartWatchesStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240127075404_shoppingCart")]
-    partial class shoppingCart
+    [Migration("20240412090448_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace SmartWatchesStore.Migrations
 
             modelBuilder.Entity("SmartWatchesStore.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -43,9 +43,9 @@ namespace SmartWatchesStore.Migrations
                         .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<double>("Price")
+                    b.Property<decimal>("Price")
                         .HasMaxLength(2500)
-                        .HasColumnType("REAL");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

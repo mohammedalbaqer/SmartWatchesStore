@@ -4,7 +4,7 @@ namespace SmartWatchesStore.Models
 {
     public class Product
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required, MaxLength(250)]
         public string Name { get; set; }
@@ -14,7 +14,7 @@ namespace SmartWatchesStore.Models
 
         [Required, MaxLength(2500)]
 
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public string Description { get; set; }
 

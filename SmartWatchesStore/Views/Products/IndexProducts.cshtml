@@ -8,6 +8,15 @@
 <section class="section gallery">
     <div class="container">
         <div class="row">
+            <form method="get" asp-action="IndexProducts" asp-controller="Products">
+                <input type="search" name="searchString" placeholder="Search watches...">
+                <a type="submit">Search</a>
+            </form>
+
+            <div>
+                <a asp-action="IndexBooks">Back to Full List</a>
+            </div>
+
             <div class="col-12 text-center mb-5">
                 <h1 class="font-weight-bold">All latest Smart Watch</h1>
             </div>
@@ -16,7 +25,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                     <div class="block">
                         <div class="gallery-overlay">
-                            <a asp-controller="Products" asp-action="Details"
+                            <a asp-controller="Cart" asp-action="Add"
                                asp-route-id="@Product.Id" class="gallery-popup">
                                 <i class="tf-ion-plus-round"></i>
                             </a>

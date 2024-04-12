@@ -4,6 +4,7 @@ using NToastNotify;
 using SmartWatchesStore.Data;
 using SmartWatchesStore.Models;
 using SmartWatchesStore.ViewModels;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace SmartWatchesStore.Controllers
 {
@@ -25,9 +26,15 @@ namespace SmartWatchesStore.Controllers
             return View(products);
         }
 
-        public async Task<IActionResult> IndexProducts()
+        public async Task<IActionResult> IndexProducts(string searchString)
         {
             var products = await _context.Products.ToListAsync();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(n => n.Name.Contains(searchString)).ToList();                
+            }
+
             return View(products);
         }
 
@@ -89,7 +96,7 @@ namespace SmartWatchesStore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
                 return BadRequest();
@@ -164,7 +171,7 @@ namespace SmartWatchesStore.Controllers
             return RedirectToAction(nameof(IndexAdmin));
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
                 return BadRequest();
@@ -177,7 +184,7 @@ namespace SmartWatchesStore.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
                 return BadRequest();

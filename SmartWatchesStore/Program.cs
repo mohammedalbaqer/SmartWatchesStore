@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using SmartWatchesStore.Data;
+using SmartWatchesStore.Models;
 using System;
 
 namespace SmartWatchesStore
@@ -19,6 +21,28 @@ namespace SmartWatchesStore
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("SqliteDbConnection")));
 
+
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+
+                options.User.RequireUniqueEmail = true;
+            });
+
             // Notify
             builder.Services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
             {
@@ -30,11 +54,16 @@ namespace SmartWatchesStore
 
             var app = builder.Build();
 
+            app.UseSession();
+
             //Here add middleware pipline
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
