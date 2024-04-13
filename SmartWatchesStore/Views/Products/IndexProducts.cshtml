@@ -8,13 +8,20 @@
 <section class="section gallery">
     <div class="container">
         <div class="row">
-            <form method="get" asp-action="IndexProducts" asp-controller="Products">
+            @* <form method="get" asp-action="IndexProducts" asp-controller="Products">
                 <input type="search" name="searchString" placeholder="Search watches...">
                 <a type="submit">Search</a>
-            </form>
+            </form> *@
 
-            <div>
-                <a asp-action="IndexBooks">Back to Full List</a>
+            <div class="container-fluid">
+                <form class="d-flex" role="search" method="get" asp-action="IndexProducts" asp-controller="Products">
+                    <input class="form-control me-2 w-50 mr-3" type="search" placeholder="Search" aria-label="Search">
+                    <a class="btn btn-dark text-white align-content-center">Search</a>
+                </form>
+            </div>
+
+            <div class="mt-3 text-dark">
+                <a class="text-dark" asp-action="IndexBooks">Back to Full List</a>
             </div>
 
             <div class="col-12 text-center mb-5">
